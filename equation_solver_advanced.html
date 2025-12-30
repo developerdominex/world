@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Advanced Equation Solver</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+body{
+    margin:0;
+    font-family:Segoe UI,Arial,sans-serif;
+    background:linear-gradient(135deg,#141e30,#243b55);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.app{
+    background:#fff;
+    width:420px;
+    max-width:95%;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 20px 50px rgba(0,0,0,.4);
+}
+h1{
+    margin:0;
+    text-align:center;
+    font-size:22px;
+    color:#222;
+}
+select,input,textarea{
+    width:100%;
+    padding:10px;
+    margin:6px 0;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:15px;
+}
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#243b55;
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+}
+button:hover{background:#1b2c42;}
+.section{display:none;}
+.result,.steps{
+    margin-top:10px;
+    padding:10px;
+    background:#f4f6f8;
+    border-radius:8px;
+    font-size:14px;
+}
+canvas{
+    width:100%;
+    height:200px;
+    background:#fff;
+    border:1px solid #ccc;
+    margin-top:10px;
+}
+.constants span{
+    display:inline-block;
+    background:#e3e7ee;
+    padding:5px 8px;
+    margin:3px;
+    border-radius:6px;
+    cursor:pointer;
+}
+.footer{
+    text-align:center;
+    font-size:12px;
+    margin-top:10px;
+    color:#666;
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+<h1><i class="fas fa-square-root-alt"></i> Advanced Equation Solver</h1>
+
+<select id="mode" onchange="show()">
+<option value="linear">Linear</option>
+<option value="quadratic">Quadratic</option>
+<option value="polynomial">Polynomial (≥3)</option>
+<option value="matrix">Matrix Solver</option>
+<option value="differential">Differential Eq (Intro)</option>
+</select>
+
+<!-- Linear -->
+<div id="linear" class="section">
+<input id="la" placeholder="a">
+<input id="lb" placeholder="b">
+</div>
+
+<!-- Quadratic -->
+<div id="quadratic" class="section">
+<input id="qa" placeholder="a">
+<input id="qb" placeholder="b">
+<input id="qc" placeholder="c">
+</div>
+
+<!-- Polynomial -->
+<div id="polynomial" class="section">
+<input id="poly" placeholder="Coefficients (e.g. 1,-6,11,-6)">
+</div>
+
+<!-- Matrix -->
+<div id="matrix" class="section">
+<input id="m11" placeholder="a₁₁">
+<input id="m12" placeholder="a₁₂">
+<input id="m21" placeholder="a₂₁">
+<input id="m22" placeholder="a₂₂">
+<input id="mc1" placeholder="c₁">
+<input id="mc2" placeholder="c₂">
+</div>
+
+<!-- Differential -->
+<div id="differential" class="section">
+<p>Solves: dy/dx = ky</p>
+<input id="kval" placeholder="k">
+<input id="y0" placeholder="y(0)">
+</div>
+
+<button onclick="solve()">Solve</button>
+
+<div class="result" id="result">Result appears here</div>
+<div class="steps" id="steps"></div>
+
+<canvas id="graph"></canvas>
+
+<div class="constants">
+<b>Constants:</b><br>
+<span onclick="insert('Math.PI')">π</span>
+<span onclick="insert('Math.E')">e</span>
+<span>c = 3×10⁸</span>
+<span>h = 6.63×10⁻³⁴</span>
+</div>
+
+<div class="footer">Educational • Offline • Physics & Math</div>
+</div>
+
+<script>
+show();
+function show(){
+document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+document.getElementById(mode.value).style.display="block";
+steps.innerHTML=""; result.innerHTML="";
+}
+
+function solve(){
+let m=mode.value;
+if(m==="linear"){
+let a=+la.value,b=+lb.value;
+result.innerHTML=`x = ${(-b/a).toFixed(4)}`;
+steps.innerHTML="ax+b=0 → x=-b/a";
+draw(x=>a*x+b);
+}
+
+if(m==="quadratic"){
+let a=+qa.value,b=+qb.value,c=+qc.value;
+let d=b*b-4*a*c;
+if(d<0){result.innerHTML="No real roots";return;}
+let x1=(-b+Math.sqrt(d))/(2*a);
+let x2=(-b-Math.sqrt(d))/(2*a);
+result.innerHTML=`x₁=${x1.toFixed(4)} , x₂=${x2.toFixed(4)}`;
+steps.innerHTML="Discriminant method";
+draw(x=>a*x*x+b*x+c);
+}
+
+if(m==="polynomial"){
+let coeff=poly.value.split(",").map(Number);
+let x=1;
+for(let i=0;i<20;i++){
+let fx=0,dfx=0;
+coeff.forEach((c,j)=>{
+fx+=c*Math.pow(x,coeff.length-1-j);
+if(j<coeff.length-1)
+dfx+=(coeff.length-1-j)*c*Math.pow(x,coeff.length-2-j);
+});
+x=x-fx/dfx;
+}
+result.innerHTML=`Approx root ≈ ${x.toFixed(4)}`;
+steps.innerHTML="Newton-Raphson numerical method";
+}
+
+if(m==="matrix"){
+let a=+m11.value,b=+m12.value,c=+m21.value,d=+m22.value;
+let e=+mc1.value,f=+mc2.value;
+let det=a*d-b*c;
+if(det===0){result.innerHTML="No unique solution";return;}
+let x=(e*d-b*f)/det;
+let y=(a*f-e*c)/det;
+result.innerHTML=`x=${x.toFixed(3)}, y=${y.toFixed(3)}`;
+steps.innerHTML="Solved using Cramer's rule";
+}
+
+if(m==="differential"){
+let k=+kval.value,y0v=+y0.value;
+result.innerHTML=`y = ${y0v}e^{${k}x}`;
+steps.innerHTML="dy/dx=ky → y=y₀e^{kx}";
+draw(x=>y0v*Math.exp(k*x));
+}
+}
+
+function draw(fn){
+let c=document.getElementById("graph");
+let ctx=c.getContext("2d");
+ctx.clearRect(0,0,c.width,c.height);
+ctx.beginPath();
+for(let px=0;px<c.width;px++){
+let x=(px-c.width/2)/20;
+let y=fn(x);
+let py=c.height/2-y*20;
+if(px===0)ctx.moveTo(px,py);
+else ctx.lineTo(px,py);
+}
+ctx.stroke();
+}
+
+function insert(v){document.activeElement.value+=v;}
+</script>
+</body>
+</html>
