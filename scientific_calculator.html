@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Advanced Scientific Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+    --bg: #f4f6f8;
+    --calc-bg: #2c3e50;
+    --btn-bg: #34495e;
+    --btn-hover: #3d566e;
+    --op-bg: #e67e22;
+    --eq-bg: #27ae60;
+    --text: #ffffff;
+    --display-bg: #ecf0f1;
+}
+
+.light {
+    --bg: #f4f6f8;
+    --calc-bg: #ffffff;
+    --btn-bg: #e0e0e0;
+    --btn-hover: #d5d5d5;
+    --op-bg: #ff9800;
+    --eq-bg: #4caf50;
+    --text: #000;
+    --display-bg: #f9f9f9;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.calculator {
+    background: var(--calc-bg);
+    color: var(--text);
+    padding: 15px;
+    border-radius: 12px;
+    width: 320px;
+}
+
+.display {
+    width: 100%;
+    height: 60px;
+    font-size: 22px;
+    text-align: right;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: var(--display-bg);
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.controls button {
+    flex: 1;
+    margin: 0 3px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+button {
+    padding: 14px;
+    font-size: 15px;
+    border: none;
+    border-radius: 8px;
+    background: var(--btn-bg);
+    color: var(--text);
+    cursor: pointer;
+}
+
+button:hover { background: var(--btn-hover); }
+
+.operator { background: var(--op-bg); }
+.equal { background: var(--eq-bg); grid-column: span 2; }
+.clear { background: #c0392b; }
+
+.history, .constants {
+    background: var(--calc-bg);
+    color: var(--text);
+    padding: 12px;
+    border-radius: 12px;
+    width: 260px;
+    max-height: 420px;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+.history h3, .constants h3 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.history-item {
+    border-bottom: 1px solid #888;
+    padding: 4px 0;
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        justify-content: center;
+    }
+}
+</style>
+</head>
+
+<body class="dark">
+
+<div class="wrapper">
+
+    <!-- Calculator -->
+    <div class="calculator">
+        <input type="text" id="display" class="display" readonly>
+
+        <div class="controls">
+            <button onclick="toggleMode()">🌙 / ☀️</button>
+            <button onclick="toggleAngle()">DEG</button>
+            <button onclick="clearDisplay()" class="clear">C</button>
+        </div>
+
+        <div class="buttons">
+            <button onclick="append('(')">(</button>
+            <button onclick="append(')')">)</button>
+            <button onclick="del()">DEL</button>
+            <button onclick="append('/') " class="operator">÷</button>
+
+            <button onclick="append('7')">7</button>
+            <button onclick="append('8')">8</button>
+            <button onclick="append('9')">9</button>
+            <button onclick="append('*')" class="operator">×</button>
+
+            <button onclick="append('4')">4</button>
+            <button onclick="append('5')">5</button>
+            <button onclick="append('6')">6</button>
+            <button onclick="append('-')" class="operator">−</button>
+
+            <button onclick="append('1')">1</button>
+            <button onclick="append('2')">2</button>
+            <button onclick="append('3')">3</button>
+            <button onclick="append('+')" class="operator">+</button>
+
+            <button onclick="append('0')">0</button>
+            <button onclick="append('.')">.</button>
+            <button onclick="calculate()" class="equal">=</button>
+
+            <button onclick="func('sin')">sin</button>
+            <button onclick="func('cos')">cos</button>
+            <button onclick="func('tan')">tan</button>
+            <button onclick="func('sqrt')">√</button>
+
+            <button onclick="func('log10')">log</button>
+            <button onclick="func('log')">ln</button>
+            <button onclick="append('**')">xʸ</button>
+            <button onclick="append('Math.PI')">π</button>
+        </div>
+    </div>
+
+    <!-- History -->
+    <div class="history">
+        <h3>History</h3>
+        <div id="historyList"></div>
+    </div>
+
+    <!-- Constants -->
+    <div class="constants">
+        <h3>Constants</h3>
+        π = 3.14159<br>
+        e = 2.71828<br>
+        c = 3×10⁸ m/s<br>
+        G = 6.67×10⁻¹¹<br>
+        h = 6.626×10⁻³⁴<br>
+        k = 1.38×10⁻²³
+    </div>
+
+</div>
+
+<script>
+const display = document.getElementById("display");
+const historyList = document.getElementById("historyList");
+let degree = true;
+
+function append(val) { display.value += val; }
+function clearDisplay() { display.value = ""; }
+function del() { display.value = display.value.slice(0, -1); }
+
+function func(name) {
+    display.value += `Math.${name}(`;
+}
+
+function toggleMode() {
+    document.body.classList.toggle("light");
+}
+
+function toggleAngle() {
+    degree = !degree;
+    event.target.textContent = degree ? "DEG" : "RAD";
+}
+
+function calculate() {
+    try {
+        let expr = display.value;
+        if (degree) {
+            expr = expr
+                .replace(/Math.sin\(/g, "Math.sin(Math.PI/180*")
+                .replace(/Math.cos\(/g, "Math.cos(Math.PI/180*")
+                .replace(/Math.tan\(/g, "Math.tan(Math.PI/180*");
+        }
+        const result = eval(expr);
+        historyList.innerHTML += `<div class="history-item">${display.value} = ${result}</div>`;
+        display.value = result;
+    } catch {
+        display.value = "Error";
+    }
+}
+
+/* Keyboard support */
+document.addEventListener("keydown", e => {
+    if ("0123456789.+-*/()".includes(e.key)) append(e.key);
+    if (e.key === "Enter") calculate();
+    if (e.key === "Backspace") del();
+});
+</script>
+
+</body>
+</html>
