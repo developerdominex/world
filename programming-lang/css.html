@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn CSS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #264de4;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header img {
+            width: 80px;
+            vertical-align: middle;
+        }
+        main {
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+            background-color: #fff;
+        }
+        section {
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #333;
+        }
+        pre {
+            background-color: #eee;
+            padding: 15px;
+            overflow-x: auto;
+        }
+        a {
+            color: #264de4;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS Logo">
+        <h1>Learn CSS</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>What is CSS?</h2>
+            <p>CSS (Cascading Style Sheets) is a stylesheet language used to describe the presentation of a web page written in HTML or XML. It allows developers to control layout, colors, fonts, spacing, and visual effects, making web pages visually appealing.</p>
+        </section>
+
+        <section>
+            <h2>Learning Hub</h2>
+            <p>Here are some useful resources to learn CSS:</p>
+            <ul>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">MDN Web Docs - CSS</a></li>
+                <li><a href="https://www.w3schools.com/css/" target="_blank">W3Schools CSS Tutorial</a></li>
+                <li><a href="https://css-tricks.com/" target="_blank">CSS-Tricks</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>CSS Code Example</h2>
+            <p>Here’s a simple CSS snippet that styles a heading and paragraph:</p>
+            <pre>
+/* style.css */
+h1 {
+    color: #264de4;
+    text-align: center;
+}
+
+p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
+            </pre>
+
+            <p>You can link this CSS file in an HTML page like this:</p>
+            <pre>
+&lt;link rel="stylesheet" href="style.css"&gt;
+            </pre>
+        </section>
+    </main>
+</body>
+</html>
