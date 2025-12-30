@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn C Programming</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Tahoma', Geneva, Verdana, sans-serif;
+            background-color: #fdf6e3;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            color: #268bd2;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Header */
+        header {
+            background-color: #073642;
+            color: #fdf6e3;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        header img {
+            height: 80px;
+            margin-bottom: 15px;
+        }
+
+        header h1 {
+            margin: 10px 0 5px 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #eee8d5;
+        }
+
+        /* Main content */
+        main {
+            max-width: 900px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        section {
+            background-color: #eee8d5;
+            padding: 25px 20px;
+            margin: 25px 0;
+            border-left: 6px solid #268bd2;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #268bd2;
+            margin-top: 0;
+            font-size: 1.8em;
+        }
+
+        p {
+            line-height: 1.7;
+        }
+
+        /* Code block */
+        .code {
+            background-color: #073642;
+            color: #fdf6e3;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        /* Resource list */
+        .resources ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+
+        .resources li {
+            margin: 8px 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #073642;
+            color: #eee8d5;
+            text-align: center;
+            padding: 20px;
+            border-top: 2px solid #268bd2;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/The_C_Programming_Language_logo.svg" alt="C Logo">
+        <h1>C Programming Learning Hub</h1>
+        <p>Learn the fundamentals of C Programming, its history, and explore resources</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>About C</h2>
+            <p>
+                C is a high-level general-purpose programming language created by <strong>Dennis Ritchie</strong> at Bell Labs in <strong>1972</strong>. 
+                Known for its efficiency and control over system resources, C is widely used in system software, operating systems, embedded systems, and game development. 
+                It provides a foundation for many modern languages like C++, Java, and Python.
+            </p>
+        </section>
+
+        <section>
+            <h2>History of C</h2>
+            <p>
+                C evolved from the B language, which itself was based on BCPL. It was designed to create a portable system software for the UNIX operating system. 
+                The first edition of "The C Programming Language" book by Kernighan and Ritchie in 1978 became the standard reference for C programmers. 
+                Today, C remains highly influential in computer science and software engineering.
+            </p>
+        </section>
+
+        <section>
+            <h2>Sample C Code</h2>
+            <div class="code">
+#include &lt;stdio.h&gt;
+
+int main() {
+    // Hello World
+    printf("Hello, World!\n");
+
+    // Loop example
+    for(int i = 0; i &lt; 5; i++) {
+        printf("Number %d\n", i);
+    }
+
+    // Function example
+    printf("%s\n", greet("Student"));
+
+    return 0;
+}
+
+char* greet(char* name) {
+    static char buffer[50];
+    sprintf(buffer, "Hello, %s!", name);
+    return buffer;
+}
+            </div>
+        </section>
+
+        <section class="resources">
+            <h2>Useful Resources</h2>
+            <p>Here are some official and helpful places to learn C:</p>
+            <ul>
+                <li><a href="https://en.cppreference.com/w/c" target="_blank">C Language Reference</a></li>
+                <li><a href="https://www.tutorialspoint.com/cprogramming/" target="_blank">TutorialsPoint C Tutorial</a></li>
+                <li><a href="https://www.geeksforgeeks.org/c-programming-language/" target="_blank">GeeksforGeeks C Programming</a></li>
+                <li><a href="https://www.learn-c.org/" target="_blank">Learn-C.org Interactive Tutorial</a></li>
+                <li><a href="https://www.w3schools.in/c-tutorial/" target="_blank">W3Schools C Tutorial</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 C Programming Learning Hub | Designed for Learning Purposes
+    </footer>
+
+</body>
+</html>
