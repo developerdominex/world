@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn TypeScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #3178c6;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header img {
+            width: 80px;
+            vertical-align: middle;
+        }
+        main {
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+            background-color: #fff;
+        }
+        section {
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #333;
+        }
+        pre {
+            background-color: #eee;
+            padding: 15px;
+            overflow-x: auto;
+        }
+        a {
+            color: #3178c6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" alt="TypeScript Logo">
+        <h1>Learn TypeScript</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>What is TypeScript?</h2>
+            <p>TypeScript is a strongly typed, object-oriented programming language developed by Microsoft. It is a superset of JavaScript, adding static types and modern features, which helps developers write safer and more maintainable code.</p>
+        </section>
+
+        <section>
+            <h2>Learning Hub</h2>
+            <p>Here are some useful resources to learn TypeScript:</p>
+            <ul>
+                <li><a href="https://www.typescriptlang.org/docs/" target="_blank">Official TypeScript Documentation</a></li>
+                <li><a href="https://www.codecademy.com/learn/learn-typescript" target="_blank">Codecademy TypeScript Course</a></li>
+                <li><a href="https://www.learntypescript.dev/" target="_blank">Learn TypeScript Online</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>TypeScript Code Example</h2>
+            <p>Here’s a simple TypeScript program that prints a greeting and adds two numbers:</p>
+            <pre>
+function greet(name: string): void {
+    console.log("Hello! Welcome to TypeScript learning, " + name + ".");
+}
+
+let a: number = 5;
+let b: number = 10;
+
+console.log(`5 + 10 = ${a + b}`);
+
+greet("Student");
+            </pre>
+        </section>
+    </main>
+</body>
+</html>
