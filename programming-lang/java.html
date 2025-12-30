@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Java</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Verdana', Geneva, Tahoma, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            color: #ff9800;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #007396, #00bcd4);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        header img {
+            height: 80px;
+            margin-bottom: 15px;
+        }
+        header h1 {
+            margin: 10px 0 5px 0;
+            font-size: 2.5em;
+        }
+        header p {
+            font-size: 1.1em;
+            color: #f0f0f0;
+        }
+
+        /* Main container */
+        main {
+            max-width: 950px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        section {
+            background-color: #1e1e1e;
+            padding: 25px 20px;
+            margin: 25px 0;
+            border-left: 6px solid #ff9800;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        h2 {
+            color: #ff9800;
+            margin-top: 0;
+            font-size: 1.8em;
+        }
+
+        p {
+            line-height: 1.7;
+        }
+
+        /* Code block */
+        .code {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        /* Resource list */
+        .resources ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .resources li {
+            margin: 8px 0;
+            padding-left: 10px;
+            position: relative;
+        }
+        .resources li::before {
+            content: "★";
+            color: #ff9800;
+            position: absolute;
+            left: -20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e1e1e;
+            color: #888;
+            text-align: center;
+            padding: 20px;
+            border-top: 2px solid #ff9800;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://www.oracle.com/a/ocom/img/cb71-java-logo.png" alt="Java Logo">
+        <h1>Java Learning Hub</h1>
+        <p>Master Java Programming, Explore History, Sample Code & Resources</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>About Java</h2>
+            <p>
+                Java is a high-level, object-oriented programming language created by <strong>James Gosling</strong> at Sun Microsystems in <strong>1995</strong>. 
+                It follows the principle "Write Once, Run Anywhere" (WORA) thanks to the Java Virtual Machine (JVM), which allows Java programs to run on any platform without modification.
+                Java is widely used for web applications, Android apps, enterprise software, and large-scale systems.
+            </p>
+        </section>
+
+        <section>
+            <h2>History of Java</h2>
+            <p>
+                Originally called Oak, Java was developed in 1991 to provide a platform-independent language for embedded devices. 
+                It was officially released as Java 1.0 in 1995. Since then, Java has evolved through multiple versions, adding features like generics, lambdas, and modules. 
+                Java remains one of the most popular programming languages in the world due to its stability, portability, and community support.
+            </p>
+        </section>
+
+        <section>
+            <h2>Sample Java Code</h2>
+            <div class="code">
+// Hello World Program
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+        
+        // Loop example
+        for(int i = 0; i < 5; i++) {
+            System.out.println("Number " + i);
+        }
+        
+        // Function example
+        System.out.println(greet("Student"));
+    }
+
+    public static String greet(String name) {
+        return "Hello, " + name + "!";
+    }
+}
+            </div>
+        </section>
+
+        <section class="resources">
+            <h2>Useful Resources</h2>
+            <p>Here are some official and helpful places to learn Java:</p>
+            <ul>
+                <li><a href="https://www.oracle.com/java/" target="_blank">Official Java Website</a></li>
+                <li><a href="https://docs.oracle.com/en/java/" target="_blank">Java Documentation</a></li>
+                <li><a href="https://www.w3schools.com/java/" target="_blank">W3Schools Java Tutorial</a></li>
+                <li><a href="https://www.javatpoint.com/java-tutorial" target="_blank">JavaTpoint</a></li>
+                <li><a href="https://www.geeksforgeeks.org/java/" target="_blank">GeeksforGeeks Java</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 Java Learning Hub | Designed for Learning Purposes
+    </footer>
+
+</body>
+</html>
