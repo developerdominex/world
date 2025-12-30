@@ -6,46 +6,88 @@
     <title>Learn Python</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6fb;
             margin: 0;
             padding: 0;
+            color: #333;
         }
+
         header {
             background-color: #306998;
             color: white;
-            padding: 20px;
+            padding: 30px 20px;
             text-align: center;
         }
+
         header img {
             height: 80px;
-            vertical-align: middle;
+            margin-bottom: 10px;
         }
+
         main {
-            padding: 20px;
-            max-width: 800px;
+            max-width: 900px;
             margin: auto;
+            padding: 30px 20px;
         }
-        h2 {
+
+        h1, h2 {
             color: #306998;
         }
-        .code {
-            background-color: #e0e0e0;
-            padding: 10px;
-            border-radius: 5px;
-            font-family: "Courier New", Courier, monospace;
-            white-space: pre-wrap;
-        }
-        footer {
-            text-align: center;
-            padding: 10px;
+
+        h2 {
+            border-bottom: 2px solid #306998;
+            padding-bottom: 5px;
             margin-top: 40px;
-            background-color: #ddd;
         }
+
+        p {
+            line-height: 1.6;
+        }
+
+        .code {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        .resources ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+
+        .resources li {
+            margin: 5px 0;
+        }
+
+        footer {
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+
         a {
             color: #306998;
             text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
     </style>
 </head>
@@ -53,46 +95,69 @@
 
     <header>
         <img src="https://www.python.org/static/community_logos/python-logo.png" alt="Python Logo">
-        <h1>Welcome to the Python Learning Hub</h1>
+        <h1>Python Learning Hub</h1>
+        <p>Learn Python, its history, and explore useful resources</p>
     </header>
 
     <main>
         <section>
             <h2>About Python</h2>
             <p>
-                Python is a high-level, interpreted programming language known for its simplicity and readability.
-                It is widely used for web development, data analysis, artificial intelligence, scientific computing,
-                automation, and more. Python's large community and extensive libraries make it a great choice for beginners and professionals alike.
+                Python is a high-level, interpreted programming language created by <strong>Guido van Rossum</strong> and first released in <strong>1991</strong>. 
+                It emphasizes code readability and simplicity, making it ideal for beginners and professionals alike. Python is widely used in web development, data science, artificial intelligence, 
+                scientific computing, automation, and more. Its extensive libraries and vibrant community have made it one of the most popular programming languages in the world.
+            </p>
+        </section>
+
+        <section>
+            <h2>History of Python</h2>
+            <p>
+                Python started as a hobby project by Guido van Rossum in the late 1980s. The goal was to create a language that was easy to read and write, yet powerful. 
+                Python 2.0 was released in 2000, introducing features like list comprehensions and a garbage collection system. Python 3.0, released in 2008, focused on removing redundancy and improving consistency. 
+                Today, Python continues to evolve with regular updates, staying relevant in modern software development and research.
             </p>
         </section>
 
         <section>
             <h2>Sample Python Code</h2>
             <div class="code">
-                # This is a simple Python program<br>
-                print("Hello, world!")<br><br>
-                # Using a loop<br>
-                for i in range(5):<br>
-                &nbsp;&nbsp;print(f"Number {i}")<br><br>
-                # Defining a function<br>
-                def greet(name):<br>
-                &nbsp;&nbsp;return f"Hello, {name}!"<br><br>
-                print(greet("Student"))
+# Print a greeting
+print("Hello, world!")
+
+# Loop example
+for i in range(5):
+    print(f"Number {i}")
+
+# Function example
+def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("Student"))
             </div>
+        </section>
+
+        <section class="resources">
+            <h2>Useful Resources</h2>
+            <p>Here are some official and helpful places to learn Python:</p>
+            <ul>
+                <li><a href="https://www.python.org/about/gettingstarted/" target="_blank">Official Python Getting Started</a></li>
+                <li><a href="https://docs.python.org/3/tutorial/" target="_blank">Python Official Tutorial</a></li>
+                <li><a href="https://www.w3schools.com/python/" target="_blank">W3Schools Python Tutorial</a></li>
+                <li><a href="https://realpython.com/" target="_blank">Real Python</a></li>
+                <li><a href="https://www.learnpython.org/" target="_blank">LearnPython.org</a></li>
+            </ul>
         </section>
 
         <section>
             <h2>Learning Hub</h2>
             <p>
-                Explore tutorials, guides, and projects to improve your Python skills. Visit the
-                <a href="https://www.python.org/about/gettingstarted/" target="_blank">Official Python Learning Hub</a>
-                for resources and documentation.
+                Explore tutorials, guides, and projects to improve your Python skills. The Python community provides extensive documentation, forums, and projects to help you learn effectively.
             </p>
         </section>
     </main>
 
     <footer>
-        &copy; 2025 Python Learning Hub
+        &copy; 2025 Python Learning Hub | Created for Learning Purposes
     </footer>
 
 </body>
