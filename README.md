@@ -1,87 +1,68 @@
-# Starlight JSON Utility
+# Starlight API Utilities
 
-**Package:** starlight-json  
-**Purpose:** Simple and safe JSON handling utilities for the Starlight programming language and server-side JavaScript environments.  
-**Developer:** Dominex Macedon  
+**Developer:** Dominex
 
-## Overview
-This package provides helper functions to safely parse, stringify, validate, clone, and pretty-print JSON data.  
-All functions are designed to fail gracefully and return `null` or `false` instead of throwing errors.
+**Description:**
+Starlight API utilities provide HTTP methods like GET, POST, PUT, PATCH, DELETE, HEAD, and OPTIONS for the Starlight Programming Language. Supports headers, auth, JSON body, query parameters, and timeouts.
 
-## Installation
-`npm install starlight-json`
+**Installation:**
+`npm install starlight-api`
 
-## Import
+**Usage:**
+
+## Basic GET Request
 `
-import json from "starlight-json";
-`
+import api from "starlight-api";
 
-## Functions
-
-**parse(text)**  
-Safely parses a JSON string.
-
-`
-let data = json.parse('{"name":"Starlight"}');
+const response = await api.get("https://example.com/data");
+console.log(response.data);
 `
 
-Returns parsed object or `null` if invalid.
-
----
-
-**stringify(obj)**  
-Converts an object into a JSON string.
-
+## POST Request with JSON
 `
-let text = json.stringify({ language: "Starlight" });
-`
+const payload = { name: "Starlight", version: "1.0.0" };
 
-Returns string or `null` if conversion fails.
-
----
-
-**pretty(obj, space = 2)**  
-Formats JSON with indentation for readability.
-
-`
-let formatted = json.pretty({ a: 1, b: 2 }, 4);
+const response = await api.post("https://example.com/api", payload, {
+    headers: { "Custom-Header": "Value" }
+});
+console.log(response.data);
 `
 
-Returns formatted JSON string or `null`.
-
----
-
-**clone(obj)**  
-Creates a deep copy of an object using JSON serialization.
-
+## Custom Headers and Auth
 `
-let copy = json.clone(originalObject);
+const response = await api.get("https://example.com/secure", {
+    headers: { "X-Token": "abc123" },
+    auth: { username: "user", password: "pass" }
+});
 `
 
-Returns cloned object or `null`.
+**Options:**
 
----
+- `method` - HTTP method (GET, POST, etc.)
+- `url` - Request URL
+- `headers` - Custom HTTP headers
+- `body` - Request body (object or string)
+- `auth` - Basic auth: { username, password }
+- `params` - Query parameters object
+- `timeout` - Request timeout in ms (default 15000)
 
-**isValid(text)**  
-Checks whether a string is valid JSON.
 
-`
-let ok = json.isValid('{"valid":true}');
-`
+## All Methods:
 
-Returns `true` or `false`.
+- `api.request(options)`
+- `api.get(url, options)`
+- `api.post(url, body, options)`
+- `api.put(url, body, options)`
+- `api.patch(url, body, options)`
+- `api.delete(url, options)`
+- `api.head(url, options)`
+- `api.options(url, options)`
 
-## Use Cases
-• Handling API responses  
-• Validating configuration files  
-• Deep cloning simple objects  
-• Safe JSON parsing in servers  
-• Logging and debugging structured data  
 
-## Notes
-• Functions never throw errors  
-• Best suited for JSON-safe data (no functions or circular references)  
-• Ideal for backend and tooling utilities in Starlight  
+**Notes:**
+- JSON responses are automatically parsed.
+- Timeout defaults to 15 seconds.
+- Handles both HTTP and HTTPS protocols.
+- Returns object: { ok, status, statusText, headers, data, raw }.
 
-## Author
-**Developer:** Dominex Macedon
+https://starlight-learn-lang.pages.dev/
