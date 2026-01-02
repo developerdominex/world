@@ -1,131 +1,146 @@
-# starlight-time
+# starlight-fs
 
-**Time and Date Utilities for the Starlight Programming Language**
+**File System Utilities for Starlight Programming Language**
 
-
-Developer – Dominex Macedon
-
-
----
-
-## Overview
-
-starlight-time provides simple and efficient time and date utilities for server-side Starlight programs.
-It is designed to be lightweight, synchronous where needed, and easy to use inside long-running services, scripts, and schedulers.
-
----
+starlight-fs provides simple, safe, and synchronous file system operations designed specifically for server-side Starlight programs.  
+It wraps Node.js fs and path modules into a clean API usable inside Starlight.
 
 ## Installation
 
 `
-npm install starlight-time
+npm install starlight-fs
 `
 
----
-
-## Importing
+## Import
 
 `
-import time from "starlight-time";
+import fs from "starlight-fs";
 `
 
----
+## Core File Operations
 
-## Available Functions
-
-**now()**
-Returns the current Date object.
-
+**Read a text file**  
 `
-let current = time.now();
+let content = fs.readFile("data.txt");
 `
 
----
+Returns file content as string or null if file does not exist.
 
-**formatDate(date?)**
-Formats a Date object into YYYY-MM-DD.
-If no argument is provided, the current date is used.
-
+**Write a text file**  
 `
-let today = time.formatDate();
-let custom = time.formatDate(time.now());
+fs.writeFile("data.txt", "Hello Starlight");
 `
 
----
+Returns true on success, false on failure.
 
-**formatTime(date?)**
-Formats a Date object into HH:MM:SS.
-If no argument is provided, the current time is used.
-
+**Append to a file**  
 `
-let clock = time.formatTime();
+fs.appendFile("log.txt", "New line");
 `
 
----
-
-**sleep(ms)**
-Blocks execution for the given milliseconds.
-Useful for controlled delays in scripts.
-
+**Delete a file**  
 `
-time.sleep(1000);
+fs.deleteFile("old.txt");
 `
 
----
+## JSON Utilities
 
-**setTimer(callback, interval)**
-Runs a callback repeatedly at a fixed interval.
-Returns a function to stop the timer.
-
+**Read JSON file**  
 `
-let stop = time.setTimer(() => {
-  sldeploy(time.formatTime());
-}, 1000);
+let data = fs.readJSON("config.json");
 `
 
-`
-stop();
-`
+Returns parsed object or null if invalid.
 
----
-
-**secondsToHMS(seconds)**
-Converts seconds into HH:MM:SS format.
-
+**Write JSON file**  
 `
-let duration = time.secondsToHMS(3661);
+fs.writeJSON("config.json", { port: 3000 });
 `
 
----
+Automatically formats JSON with indentation.
 
-## Typical Usage (Clock Style)
+## Directory Operations
 
+**Create directory**  
 `
-import time from "starlight-time";
+fs.makeDir("storage");
+`
 
-time.setTimer(() => {
-let now = time.formatTime();
-sldeploy(now);
-}, 1000); `
+**List directory contents**  
+`
+let files = fs.listDir("storage");
+`
 
----
+**Delete directory recursively**  
+`
+fs.deleteDir("storage");
+`
 
-## Server-Side Notes
+## Copy Utilities
 
-• Designed for server-side execution
-• No browser dependencies
-• Safe for long-running processes
-• Ideal for schedulers, logs, timers, and system utilities
+**Copy a file**  
+`
+fs.copyFile("a.txt", "b.txt");
+`
 
----
+**Copy a directory recursively**  
+`
+fs.copyDir("src", "backup");
+`
 
-## Related
+## Path Utilities
 
+**Join paths**  
+`
+let p = fs.join("a", "b", "file.txt");
+`
 
-Starlight Language Learning Hub
+**Get base name**  
+`
+fs.basename("/path/to/file.txt");
+`
 
+**Get directory name**  
+`
+fs.dirname("/path/to/file.txt");
+`
 
----
+**Get extension**  
+`
+fs.extname("file.txt");
+`
 
+**Resolve absolute path**  
+`
+fs.resolve("data", "file.txt");
+`
 
-starlight-time is part of the official Starlight standard ecosystem.
+## Server-Side Usage
+
+starlight-fs is intended for:
+- Server-side scripting
+- CLI tools
+- File-based storage
+- Configuration handling
+- Build tools
+- PDF, JSON, and data pipelines
+
+It is not designed for browser environments.
+
+## Error Handling Philosophy
+
+All operations fail safely.  
+Instead of throwing errors, functions return:
+- null
+- false
+- empty arrays
+
+This keeps Starlight scripts predictable and stable.
+
+## Author
+
+**Developer:** Dominex Macedon
+
+## Learning Hub
+
+Starlight Language Documentation
