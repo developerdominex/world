@@ -1,103 +1,131 @@
-# Starlight TXT to PDF
+# starlight-time
 
-**Purpose**
-Starlight TXT to PDF converts a plain text file written in a simple DSL into a styled PDF.
-It supports headers, colors, bold, italic, absolute positioning, images, and automatic pagination.
+**Time and Date Utilities for the Starlight Programming Language**
+
+
+Developer – Dominex Macedon
+
+
+---
+
+## Overview
+
+starlight-time provides simple and efficient time and date utilities for server-side Starlight programs.
+It is designed to be lightweight, synchronous where needed, and easy to use inside long-running services, scripts, and schedulers.
+
+---
 
 ## Installation
 
-` npm install starlight-txt-to-pdf `
-
-## Basic Usage
-
-` import { txtToPdf } from "starlight-txt-to-pdf";
-
-await txtToPdf("input.txt", "output.pdf", {
-header: "My Document Header"
-});
+`
+npm install starlight-time
 `
 
-## TXT DSL Syntax
+---
 
-**1. Headings**
-Use hash-style headings inside the TXT file.
+## Importing
 
-` # Title ## Section ### Sub Section `
-
-**2. Bold Text**
-
-` [b]This text is bold[/b] `
-
-**3. Italic Text**
-
-` [i]This text is italic[/i] `
-
-**4. Colored Text**
-
-` [color:red]Red Text[/color] [color:gray]Gray Text[/color] [color:blue]Blue Text[/color] `
-
-Supported colors:
-red, green, blue, yellow, cyan, magenta, gray, white, black
-
-**5. Absolute Positioned Text**
-Draw text at an exact X,Y position on the page.
-
-` [pos:430,120][color:gray]— Macedon[/color][/pos] `
-
-Coordinates are in PDF points.
-
-**6. Images**
-Embed images anywhere on the page.
-
-` [img:logo.png,x=450,y=50,w=80,h=80] `
-
-Supported formats: PNG, JPG, JPEG
-
-## Page Layout
-
-• Automatic page breaks
-• Header shown on every page
-• Footer with page number
-• Margins handled internally
-
-Header text can be customized using options.
-
-## Options
-
-**header**
-Text shown at the top of every page.
-
-` { header: "My Custom Header" } `
-
-## Example TXT File
-
-` # Love Letter
-
-[color:red]My Dearest[/color]
-
-This document was generated using Starlight.
-
-[pos:420,100][color:gray]— Dominex Macedon[/color][/pos]
-
-[img:logo.png,x=460,y=40,w=60,h=60]
+`
+import time from "starlight-time";
 `
 
-## Output
+---
 
-• Clean PDF layout
-• Styled text
-• Images embedded
-• Multi-page support
+## Available Functions
 
-## Notes
+**now()**
+Returns the current Date object.
 
-• TXT file must exist
-• Image paths must be valid
-• Colors are predefined
-• Absolute positioning overrides flow layout
+`
+let current = time.now();
+`
 
-## Developer
+---
 
-**Developer - Dominex Macedon**
+**formatDate(date?)**
+Formats a Date object into YYYY-MM-DD.
+If no argument is provided, the current date is used.
 
-https://starlight-learn-lang.pages.dev/
+`
+let today = time.formatDate();
+let custom = time.formatDate(time.now());
+`
+
+---
+
+**formatTime(date?)**
+Formats a Date object into HH:MM:SS.
+If no argument is provided, the current time is used.
+
+`
+let clock = time.formatTime();
+`
+
+---
+
+**sleep(ms)**
+Blocks execution for the given milliseconds.
+Useful for controlled delays in scripts.
+
+`
+time.sleep(1000);
+`
+
+---
+
+**setTimer(callback, interval)**
+Runs a callback repeatedly at a fixed interval.
+Returns a function to stop the timer.
+
+`
+let stop = time.setTimer(() => {
+  sldeploy(time.formatTime());
+}, 1000);
+`
+
+`
+stop();
+`
+
+---
+
+**secondsToHMS(seconds)**
+Converts seconds into HH:MM:SS format.
+
+`
+let duration = time.secondsToHMS(3661);
+`
+
+---
+
+## Typical Usage (Clock Style)
+
+`
+import time from "starlight-time";
+
+time.setTimer(() => {
+let now = time.formatTime();
+sldeploy(now);
+}, 1000); `
+
+---
+
+## Server-Side Notes
+
+• Designed for server-side execution
+• No browser dependencies
+• Safe for long-running processes
+• Ideal for schedulers, logs, timers, and system utilities
+
+---
+
+## Related
+
+
+Starlight Language Learning Hub
+
+
+---
+
+
+starlight-time is part of the official Starlight standard ecosystem.
