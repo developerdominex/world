@@ -1,146 +1,87 @@
-# starlight-fs
+# Starlight JSON Utility
 
-**File System Utilities for Starlight Programming Language**
+**Package:** starlight-json  
+**Purpose:** Simple and safe JSON handling utilities for the Starlight programming language and server-side JavaScript environments.  
+**Developer:** Dominex Macedon  
 
-starlight-fs provides simple, safe, and synchronous file system operations designed specifically for server-side Starlight programs.  
-It wraps Node.js fs and path modules into a clean API usable inside Starlight.
+## Overview
+This package provides helper functions to safely parse, stringify, validate, clone, and pretty-print JSON data.  
+All functions are designed to fail gracefully and return `null` or `false` instead of throwing errors.
 
 ## Installation
-
-`
-npm install starlight-fs
-`
+`npm install starlight-json`
 
 ## Import
-
 `
-import fs from "starlight-fs";
-`
-
-## Core File Operations
-
-**Read a text file**  
-`
-let content = fs.readFile("data.txt");
+import json from "starlight-json";
 `
 
-Returns file content as string or null if file does not exist.
+## Functions
 
-**Write a text file**  
-`
-fs.writeFile("data.txt", "Hello Starlight");
-`
+**parse(text)**  
+Safely parses a JSON string.
 
-Returns true on success, false on failure.
-
-**Append to a file**  
 `
-fs.appendFile("log.txt", "New line");
+let data = json.parse('{"name":"Starlight"}');
 `
 
-**Delete a file**  
+Returns parsed object or `null` if invalid.
+
+---
+
+**stringify(obj)**  
+Converts an object into a JSON string.
+
 `
-fs.deleteFile("old.txt");
+let text = json.stringify({ language: "Starlight" });
 `
 
-## JSON Utilities
+Returns string or `null` if conversion fails.
 
-**Read JSON file**  
-`
-let data = fs.readJSON("config.json");
-`
+---
 
-Returns parsed object or null if invalid.
+**pretty(obj, space = 2)**  
+Formats JSON with indentation for readability.
 
-**Write JSON file**  
 `
-fs.writeJSON("config.json", { port: 3000 });
+let formatted = json.pretty({ a: 1, b: 2 }, 4);
 `
 
-Automatically formats JSON with indentation.
+Returns formatted JSON string or `null`.
 
-## Directory Operations
+---
 
-**Create directory**  
-`
-fs.makeDir("storage");
-`
+**clone(obj)**  
+Creates a deep copy of an object using JSON serialization.
 
-**List directory contents**  
 `
-let files = fs.listDir("storage");
+let copy = json.clone(originalObject);
 `
 
-**Delete directory recursively**  
+Returns cloned object or `null`.
+
+---
+
+**isValid(text)**  
+Checks whether a string is valid JSON.
+
 `
-fs.deleteDir("storage");
+let ok = json.isValid('{"valid":true}');
 `
 
-## Copy Utilities
+Returns `true` or `false`.
 
-**Copy a file**  
-`
-fs.copyFile("a.txt", "b.txt");
-`
+## Use Cases
+• Handling API responses  
+• Validating configuration files  
+• Deep cloning simple objects  
+• Safe JSON parsing in servers  
+• Logging and debugging structured data  
 
-**Copy a directory recursively**  
-`
-fs.copyDir("src", "backup");
-`
-
-## Path Utilities
-
-**Join paths**  
-`
-let p = fs.join("a", "b", "file.txt");
-`
-
-**Get base name**  
-`
-fs.basename("/path/to/file.txt");
-`
-
-**Get directory name**  
-`
-fs.dirname("/path/to/file.txt");
-`
-
-**Get extension**  
-`
-fs.extname("file.txt");
-`
-
-**Resolve absolute path**  
-`
-fs.resolve("data", "file.txt");
-`
-
-## Server-Side Usage
-
-starlight-fs is intended for:
-- Server-side scripting
-- CLI tools
-- File-based storage
-- Configuration handling
-- Build tools
-- PDF, JSON, and data pipelines
-
-It is not designed for browser environments.
-
-## Error Handling Philosophy
-
-All operations fail safely.  
-Instead of throwing errors, functions return:
-- null
-- false
-- empty arrays
-
-This keeps Starlight scripts predictable and stable.
+## Notes
+• Functions never throw errors  
+• Best suited for JSON-safe data (no functions or circular references)  
+• Ideal for backend and tooling utilities in Starlight  
 
 ## Author
-
 **Developer:** Dominex Macedon
-
-## Learning Hub
-
-Starlight Language Documentation
