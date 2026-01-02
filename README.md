@@ -1,148 +1,103 @@
-starlight-pdf
+# Starlight TXT to PDF
 
-starlight-pdf is a server-side utility package for the Starlight Programming Language ecosystem that provides PDF processing features for Node.js environments.
-It allows developers to convert PDF files into images and rebuild PDFs from image files, making it suitable for previews, transformations, and document pipelines.
+**Purpose**
+Starlight TXT to PDF converts a plain text file written in a simple DSL into a styled PDF.
+It supports headers, colors, bold, italic, absolute positioning, images, and automatic pagination.
 
-This package is intended for developer and backend use only and is not designed for browser environments.
+## Installation
 
-Features
+` npm install starlight-txt-to-pdf `
 
-Convert each page of a PDF into high-quality PNG images
+## Basic Usage
 
-Rebuild a PDF from a list of image files
+` import { txtToPdf } from "starlight-txt-to-pdf";
 
-Uses stable libraries such as pdfjs-dist, canvas, and pdf-lib
+await txtToPdf("input.txt", "output.pdf", {
+header: "My Document Header"
+});
+`
 
-Fully compatible with ES Modules
+## TXT DSL Syntax
 
-Safe worker and path handling for Node.js
+**1. Headings**
+Use hash-style headings inside the TXT file.
 
-Installation
+` # Title ## Section ### Sub Section `
 
-Install using npm:
+**2. Bold Text**
 
-npm install starlight-pdf
+` [b]This text is bold[/b] `
 
-Requirements
+**3. Italic Text**
 
-This package runs in a Node.js environment and requires native dependencies.
+` [i]This text is italic[/i] `
 
-Node.js
+**4. Colored Text**
 
-Node.js version 16 or later is recommended.
+` [color:red]Red Text[/color] [color:gray]Gray Text[/color] [color:blue]Blue Text[/color] `
 
-Native Dependencies
+Supported colors:
+red, green, blue, yellow, cyan, magenta, gray, white, black
 
-Because this package uses canvas, system-level libraries are required.
+**5. Absolute Positioned Text**
+Draw text at an exact X,Y position on the page.
 
-Windows
+` [pos:430,120][color:gray]— Macedon[/color][/pos] `
 
-Install windows-build-tools or use prebuilt canvas binaries when available.
+Coordinates are in PDF points.
 
-Linux (Ubuntu / Debian)
+**6. Images**
+Embed images anywhere on the page.
 
-sudo apt install libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+` [img:logo.png,x=450,y=50,w=80,h=80] `
 
-macOS
+Supported formats: PNG, JPG, JPEG
 
-brew install pkg-config cairo pango libpng jpeg giflib librsvg
+## Page Layout
 
-Usage
-Importing the Module
+• Automatic page breaks
+• Header shown on every page
+• Footer with page number
+• Margins handled internally
 
-import pdfUtils from "starlight-pdf";
+Header text can be customized using options.
 
-Convert PDF to Images
+## Options
 
-await pdfUtils.pdfToImages(
-"./input.pdf",
-"./output-images"
-);
+**header**
+Text shown at the top of every page.
 
-Result:
+` { header: "My Custom Header" } `
 
-Each page is rendered as page-1.png, page-2.png, and so on
+## Example TXT File
 
-Images are rendered at high resolution
+` # Love Letter
 
-Convert Images Back to PDF
+[color:red]My Dearest[/color]
 
-await pdfUtils.imagesToPdf(
-[
-"./output-images/page-1.png",
-"./output-images/page-2.png"
-],
-"./output.pdf"
-);
+This document was generated using Starlight.
 
-Result:
+[pos:420,100][color:gray]— Dominex Macedon[/color][/pos]
 
-A new PDF is created using the provided images
+[img:logo.png,x=460,y=40,w=60,h=60]
+`
 
-Image dimensions are preserved exactly
+## Output
 
-API Reference
-pdfToImages(pdfPath, outputDir)
+• Clean PDF layout
+• Styled text
+• Images embedded
+• Multi-page support
 
-Converts a PDF into PNG images.
+## Notes
 
-Parameters:
+• TXT file must exist
+• Image paths must be valid
+• Colors are predefined
+• Absolute positioning overrides flow layout
 
-pdfPath (string): Path to the source PDF
+## Developer
 
-outputDir (string): Directory where images will be saved
+**Developer - Dominex Macedon**
 
-Returns:
-
-Promise<string[]> — Array of generated image file paths
-
-imagesToPdf(imagePaths, outputPdf)
-
-Creates a PDF from image files.
-
-Parameters:
-
-imagePaths (string[]): Array of image paths (PNG or JPG)
-
-outputPdf (string): Output PDF file path
-
-Returns:
-
-Promise<string> — Output PDF path
-
-Internal Notes
-
-Uses pdfjs-dist legacy build for Node.js compatibility
-
-Worker source is resolved manually to prevent runtime errors
-
-Uses canvas for rendering and pdf-lib for PDF generation
-
-Fully compatible with ES Module syntax
-
-Starlight Ecosystem
-
-This package is part of the Starlight Programming Language ecosystem and is designed to work alongside other Starlight packages such as:
-
-starlight-cli
-
-starlight-fs
-
-starlight-api
-
-starlight-time
-
-starlight-color
-
-Learning hub and documentation:
 https://starlight-learn-lang.pages.dev/
-
-License
-
-MIT License
-
-Author
-
-developerdominex
-
-Built for developers who need reliable server-side document processing within the Starlight ecosystem.
